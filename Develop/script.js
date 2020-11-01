@@ -1,13 +1,9 @@
 $(document).ready(function () {
   // display current date within #currentday id
 
-  //  run every second
   $("#currentDay").text(moment().format("LLLL"));
 
-
   var currentHour = parseInt(moment().format("HH"));
-
-  //  each time block is color-coded to indicate whether it is in the past, present, or future
 
   //Change textarea background color based on time
   var checkTime = function () {
@@ -32,6 +28,10 @@ $(document).ready(function () {
   // WHEN I refresh the page
   // THEN the saved events persist
   // ```
+  
+  $(".saveBtn").addEventListener('click', function() {
+    localStorage.setItem("timeBlockArray", timeBlockArray.value);
+  }, false);
 
 
   //get local data
@@ -40,10 +40,8 @@ $(document).ready(function () {
     var $timeblock = $(timeBlockArray[index]);
     //get the id
     var id = $timeblock.find("textarea").attr("id");
-    console.log("****id",id);
     //get that data associated with the id
     var data = localStorage.getItem(`hour-${id}`);
-    console.log("****data",data);
     //udpate the textarea
     if (data) {
       timeBlockArray.find("textarea").val(data);
